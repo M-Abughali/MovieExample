@@ -33,6 +33,15 @@ android {
 
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    // For Kotlin projects
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
@@ -52,6 +61,29 @@ dependencies {
     def nav_version = "2.3.0-alpha06"
     def lifecycle_version = "2.2.0"
 
+    def retrofit2_version = "2.7.0"
+    def okhttp3_version = "4.2.2"
+    def picassoVersion = "2.71828"
+
+
+    //Retrofit2
+    implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
+
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    //Okhttp3
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp3_version"
+
+
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+    //Picasso for Image Loading
+    implementation ("com.squareup.picasso:picasso:$picassoVersion"){
+        exclude group: "com.android.support"
+    }
 
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
@@ -72,7 +104,7 @@ dependencies {
     implementation 'com.google.dagger:dagger:2.27'
     kapt 'com.google.dagger:dagger-compiler:2.27'
     kapt 'com.google.dagger:dagger-android-processor:2.20'
-    testImplementation 'org.mockito:mockito-core:2.28.2'
+    testImplementation 'org.mockito:mockito-core:3.2.4'
     testImplementation 'org.mockito:mockito-inline:2.13.0'
 
 
