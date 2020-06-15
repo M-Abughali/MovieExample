@@ -8,9 +8,8 @@ import retrofit2.Call
 
 interface MovieApiServices {
     //http://api.themoviedb.org/3/movie/now_playing?api_key=ab852022baac8256ea5738cd1b69fe1b
-    @GET("movie/popular?api_key=$API_TOKEN")
+    @GET("movie/popular")
      fun getMovies(
-        @Query("language") language: String?,
         @Query("page") page: String?
     ): Call<MovieResult>
 

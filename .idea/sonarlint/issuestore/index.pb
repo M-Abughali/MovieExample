@@ -1,8 +1,6 @@
 
 d
 4app/src/main/res/drawable/ic_launcher_background.xml,4\9\49845c622cb06d895975c7b1e3f943e320bce688
-h
-8app/src/main/res/drawable-v24/ic_launcher_foreground.xml,0\7\078508c831007ccb3938b355f0d30a8368f99a8d
 b
 2app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml,8\e\8e27ba16c655f421171956147d0fde89b7d25d17
 h
@@ -68,3 +66,19 @@ P
 app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
 h
 8app/src/main/java/com/mj/movieexample/ui/MainActivity.kt,5\7\576985a05fb6b40dc962be96ba2b72d5e2f0b808
+p
+@app/src/main/java/com/mj/movieexample/network/AuthInterceptor.kt,5\7\572fadfd6caacab42d0e7d7dc0953cb4efa6cbd8
+s
+Capp/src/main/java/com/mj/movieexample/ui/movieAdapter/viewHolder.kt,7\2\729da98fa6d35c0056bcfdbc52a03b0f5bbd3128
+t
+Dapp/src/main/java/com/mj/movieexample/ui/movieAdapter/viewHolder2.kt,e\d\ed5236cd8766158a52f7d24d639208873cb2bf6a
+g
+7app/src/main/java/com/mj/movieexample/util/Constants.kt,8\f\8fa6b24782e4dc9aae1128b66be9bbd5600cb3f4
+`
+0app/src/main/res/drawable/image_place_holder.xml,f\1\f134cc4e115992a76d03e8b9388b884e3aa94171
+Y
+)app/src/main/res/layout/activity_main.xml,7\6\76b07e40f24cce093536731477540f12e7da3cb6
+Y
+)app/src/main/res/navigation/nav_graph.xml,b\a\baffce053da291d96fb575a09f2bbe9aaa9c4be9
+u
+Eapp/src/main/java/com/mj/movieexample/ui/movieAdapter/MovieAdapter.kt,b\a\bade8110ed8661cc9d5068c0262798e51fbc22e0

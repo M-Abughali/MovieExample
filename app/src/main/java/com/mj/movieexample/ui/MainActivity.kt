@@ -47,11 +47,16 @@ class MainActivity : AppCompatActivity() {
                 }
                 is Result.Fail -> {
                     showProgrss(false)
-                    Toast.makeText(this, "faild", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "faild "+it.msg, Toast.LENGTH_LONG).show();
                 }
-                Result.InProgrss -> {
+                is Result.InProgrss -> {
                     showProgrss(true)
                     Toast.makeText(this, "InProgrss", Toast.LENGTH_LONG).show();
+                }
+                is Result.NoInternetError ->{
+                    showProgrss(false)
+                    Toast.makeText(this, "No Internet Connection", Toast.LENGTH_LONG).show();
+
                 }
             };
 
