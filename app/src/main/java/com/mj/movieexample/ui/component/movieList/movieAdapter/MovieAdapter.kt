@@ -10,12 +10,18 @@ import com.mj.movieexample.databinding.RowItemBinding
 import com.mj.movieexample.data.model.Movie
 import com.mj.movieexample.ui.base.listeners.RecyclerItemListener
 
-class MovieAdapter(val list: List<Movie>,val recyclerItemListener: RecyclerItemListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MovieAdapter(val recyclerItemListener: RecyclerItemListener) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    var list: ArrayList<Movie> = ArrayList<Movie>();
+    private  val VIEW_TYPE1 = 1;
+    private  val VIEW_TYPE2 = 2;
 
-    private final val VIEW_TYPE1 = 1;
-    private final val VIEW_TYPE2 = 2;
 
+    fun setItems(list: List<Movie>) {
+        this.list.clear()
+        this.list.addAll(list)
 
+    }
 
     override fun getItemViewType(position: Int): Int {
         if (list.get(position).title.startsWith("A"))
@@ -33,7 +39,7 @@ class MovieAdapter(val list: List<Movie>,val recyclerItemListener: RecyclerItemL
                 parent,
                 false
             )
-            return MovieViewHolder(rowItemBinding,recyclerItemListener);
+            return MovieViewHolder(rowItemBinding, recyclerItemListener);
         } else {
             val rowItemBinding2 = DataBindingUtil.inflate<RowItem2Binding>(
                 LayoutInflater.from(parent.context),
@@ -41,7 +47,7 @@ class MovieAdapter(val list: List<Movie>,val recyclerItemListener: RecyclerItemL
                 parent,
                 false
             )
-            return MovieViewHolder2(rowItemBinding2,recyclerItemListener);
+            return MovieViewHolder2(rowItemBinding2, recyclerItemListener);
         }
 
     }

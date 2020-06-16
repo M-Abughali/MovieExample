@@ -24,9 +24,8 @@ import kotlinx.android.synthetic.main.activity_movie_list.*
 import javax.inject.Inject
 
 class MovieListActivity : BaseActivity(), RecyclerItemListener {
-    //var isLastPage: Boolean = false
     var isLoading: Boolean = false
-
+    lateinit var movieAdapter: MovieAdapter;
 
     lateinit var binding: ActivityMovieListBinding;
 
@@ -93,12 +92,19 @@ class MovieListActivity : BaseActivity(), RecyclerItemListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        linearLayoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        rvMovies.layoutManager = linearLayoutManager;
-        movieViewModel.getMovieFromServer();
+        initRecyclerView()
         setRecyclerViewScrollListener()
+        movieViewModel.getMovieFromServer();
+
     }
 
+    private fun initRecyclerView() {
+        linearLayoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        movieAdapter = MovieAdapter(this);
+        rvMovies.layoutManager = linearLayoutManager;
+        rvMovies.adapter = movieAdapter
+
+    }
 
     private fun setRecyclerViewScrollListener() {
         rvMovies?.addOnScrollListener(object : PaginationScrollListener(linearLayoutManager) {
@@ -118,7 +124,8 @@ class MovieListActivity : BaseActivity(), RecyclerItemListener {
 
     private fun bindListData(list: List<Movie>) {
         if (!(list.isNullOrEmpty())) {
-            rvMovies.adapter = MovieAdapter(list, this);
+            movieAdapter.setItems(list);
+            movieAdapter.notifyDataSetChanged()
             showDataView(true)
         } else {
             showDataView(false)

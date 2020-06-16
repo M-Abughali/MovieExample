@@ -10,7 +10,6 @@
         tools:context=".ui.component.splash.SplashActivity">
 
 
-
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -19,6 +18,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar_layout" />
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
