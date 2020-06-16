@@ -16,13 +16,9 @@ class MovieDetailsActivity : BaseActivity() {
         MyApp.getInstance().getMovieComponent().inject(this)
     }
 
-    override fun initializeViewModel() {
+    override fun initializeViewModel() {}
 
-    }
-
-    override fun observeViewModel() {
-
-    }
+    override fun observeViewModel() {}
 
     override fun initViewBinding() {
         binding = ActivityMovieDetailsBinding.inflate(layoutInflater)
