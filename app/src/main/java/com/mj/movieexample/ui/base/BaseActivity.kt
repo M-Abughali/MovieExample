@@ -5,51 +5,49 @@ import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
+import com.mj.movieexample.R
 import com.mj.movieexample.core.MyApp
 import com.mj.movieexample.databinding.ToolbarBinding
 import com.mj.movieexample.ui.base.listeners.ActionBarView
 import com.task.ui.base.BaseViewModel
+import kotlinx.android.synthetic.main.toolbar.*
 
 abstract class BaseActivity : AppCompatActivity(), ActionBarView {
 
-
-    protected lateinit var toolbarBinding: ToolbarBinding
 
     protected abstract fun injectActivity(baseActivity: BaseActivity)
     protected abstract fun initializeViewModel()
     protected abstract fun observeViewModel()
     protected abstract fun initViewBinding()
+    protected abstract fun initToolBar()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         initViewBinding()
+        initToolBar()
         injectActivity(this)
-        initializeToolbar()
         initializeViewModel()
         observeViewModel()
     }
 
-    private fun initializeToolbar() {
-        toolbarBinding = ToolbarBinding.inflate(layoutInflater)
-        toolbarBinding.txtToolbarTitle.text = ""
-    }
 
     override fun setUpIconVisibility(visible: Boolean) {
+       // setSupportActionBar(findViewById(R.id.toolbar))
         val actionBar = supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(visible)
     }
 
     override fun setTitle(titleKey: String) {
-        toolbarBinding.txtToolbarTitle.text = titleKey
+        txtToolbarTitle.text = titleKey
     }
 
     override fun setSettingsIconVisibility(visibility: Boolean) {
-        toolbarBinding.icToolbarSetting.visibility = if (visibility) VISIBLE else GONE
+        icToolbarSetting.visibility = if (visibility) VISIBLE else GONE
     }
 
     override fun setRefreshVisibility(visibility: Boolean) {
-        toolbarBinding.icToolbarRefresh.visibility = if (visibility) VISIBLE else GONE
+        icToolbarRefresh.visibility = if (visibility) VISIBLE else GONE
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

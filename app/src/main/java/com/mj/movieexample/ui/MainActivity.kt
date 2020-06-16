@@ -36,8 +36,15 @@ class MainActivity : BaseActivity() {
 
 
     override fun initViewBinding() {
-        binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+    }
+
+    override fun initToolBar() {
+       // setUpIconVisibility(true)
+        setTitle("get data activity")
+        setSettingsIconVisibility(true)
+        setRefreshVisibility(true)
     }
 
     override fun injectActivity(baseActivity: BaseActivity) {
@@ -80,6 +87,8 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         rvMovies.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         movieViewModel.getMovieFromServer();
 

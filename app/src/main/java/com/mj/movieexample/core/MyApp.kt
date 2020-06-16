@@ -10,7 +10,7 @@ import com.mj.movieexample.di.module.AppModule
 class MyApp : Application() {
     private lateinit var movieComponent: MovieComponent;
 
-     fun getMovieComponent(): MovieComponent {
+    fun getMovieComponent(): MovieComponent {
         return movieComponent;
     }
 
@@ -25,10 +25,9 @@ class MyApp : Application() {
     override fun onCreate() {
         super.onCreate()
         Instance = this;
-        movieComponent = DaggerMovieComponent.builder().appModule(AppModule(this)).build();
+        movieComponent = DaggerMovieComponent.builder().injectApplication(this).build();
 
     }
-
 
 
 }
