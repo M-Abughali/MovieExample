@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mj.movieexample.R
 import com.mj.movieexample.databinding.RowItem2Binding
 import com.mj.movieexample.databinding.RowItemBinding
-import com.mj.movieexample.model.Movie
+import com.mj.movieexample.data.model.Movie
 
 class MovieAdapter(val list: List<Movie>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

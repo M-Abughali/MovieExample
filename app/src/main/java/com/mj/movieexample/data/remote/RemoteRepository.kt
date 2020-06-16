@@ -1,19 +1,17 @@
-package com.mj.movieexample.model
+package com.mj.movieexample.data.remote
 
 import androidx.lifecycle.MutableLiveData
-import com.mj.movieexample.network.MovieApiServices
+import com.mj.movieexample.data.model.Movie
+import com.mj.movieexample.data.model.MovieResult
 import com.mj.movieexample.network.NoInternetException
 import com.mj.movieexample.util.Result
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
 
-class MovieRepository @Inject constructor(val movieApiServices: MovieApiServices) {
+class RemoteRepository @Inject constructor(val movieApiServices: MovieApiServices) {
     private val mutableLiveData = MutableLiveData<Result<List<Movie>>>();
 
 
@@ -26,9 +24,9 @@ class MovieRepository @Inject constructor(val movieApiServices: MovieApiServices
         movieApiServices.getMovies("1").enqueue(object : Callback<MovieResult> {
             override fun onFailure(call: Call<MovieResult>, t: Throwable) {
                 when (t) {
-                    is NoInternetException -> mutableLiveData.postValue(Result.NoInternetError);
+                    is NoInternetException -> mutableLiveData.postValue(Result.NetworkNoInternetError);
                     else -> {
-                        mutableLiveData.postValue(Result.Fail("msg" + t.message));
+                        mutableLiveData.postValue(Result.NetworkGeneralError("msg" + t.message));
 
                     }
                 }

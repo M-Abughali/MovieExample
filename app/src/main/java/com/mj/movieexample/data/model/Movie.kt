@@ -1,4 +1,4 @@
-package com.mj.movieexample.model
+package com.mj.movieexample.data.model
 
 data class Movie(
     val adult: Boolean,

@@ -13,6 +13,8 @@ class NetworkInterceptor @Inject constructor(val application: Application) : Int
 
     private val API_KEY = "api_key"
     private val LANUAGE = "language"
+    private val CONTENT_TYPE = "Content-Type"
+    private val CONTENT_TYPE_VALUE = "application/json"
 
     fun isInternetAvailable(): Boolean {
         val info = application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -32,13 +34,13 @@ class NetworkInterceptor @Inject constructor(val application: Application) : Int
             .addQueryParameter(API_KEY, BuildConfig.API_TOKEN)
             .addQueryParameter(LANUAGE, Locale.getDefault().language)
             .build()
-        request = request.newBuilder().url(url).build()
+
+        request = request.newBuilder().header(CONTENT_TYPE, CONTENT_TYPE_VALUE)
+            .method(request.method, request.body).url(url).build()
 
 
         if (!isInternetAvailable())
             throw  NoInternetException("noInternt")
-
-
 
         return chain.proceed(request)
 

@@ -26,6 +26,7 @@ class MyApp : Application() {
         super.onCreate()
         Instance = this;
         movieComponent = DaggerMovieComponent.builder().appModule(AppModule(this)).build();
+
     }
 
 

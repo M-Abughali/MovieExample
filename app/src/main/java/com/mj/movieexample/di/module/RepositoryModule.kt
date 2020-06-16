@@ -1,8 +1,7 @@
 package com.mj.movieexample.di.module
 
-import android.app.Application
-import com.mj.movieexample.model.MovieRepository
-import com.mj.movieexample.network.MovieApiServices
+import com.mj.movieexample.data.remote.RemoteRepository
+import com.mj.movieexample.data.remote.MovieApiServices
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -12,8 +11,8 @@ import javax.inject.Singleton
 class RepositoryModule() {
     @Singleton
     @Provides
-    fun getRepostory(movieApiServices: MovieApiServices): MovieRepository {
-        return MovieRepository(movieApiServices)
+    fun getRepostory(movieApiServices: MovieApiServices): RemoteRepository {
+        return RemoteRepository(movieApiServices)
     }
 
 

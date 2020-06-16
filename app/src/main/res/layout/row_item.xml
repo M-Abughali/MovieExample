@@ -7,7 +7,7 @@
 
         <variable
             name="movieItem"
-            type="com.mj.movieexample.model.Movie" />
+            type="com.mj.movieexample.data.model.Movie" />
     </data>
 
     <androidx.cardview.widget.CardView

@@ -1,10 +1,9 @@
 package com.mj.movieexample.ui.movieAdapter
 
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.mj.movieexample.R
 import com.mj.movieexample.databinding.RowItemBinding
-import com.mj.movieexample.model.Movie
+import com.mj.movieexample.data.model.Movie
 import com.mj.movieexample.util.Constants
 import com.squareup.picasso.Picasso
 

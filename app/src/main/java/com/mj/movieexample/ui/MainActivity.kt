@@ -2,18 +2,20 @@ package com.mj.movieexample.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mj.movieexample.core.MyApp
 import com.mj.movieexample.R
+import com.mj.movieexample.data.model.Movie
+import com.mj.movieexample.databinding.ActivityMainBinding
+import com.mj.movieexample.ui.base.BaseActivity
 import com.mj.movieexample.ui.movieAdapter.MovieAdapter
-import com.mj.movieexample.ui.viewModel.DisplayMovieViewModel
+import com.mj.movieexample.ui.viewModel.MovieListViewModel
 import com.mj.movieexample.ui.viewModel.ViewModelFactory
 import com.mj.movieexample.util.*;
 import kotlinx.android.synthetic.main.activity_main.*
@@ -22,55 +24,86 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
+    lateinit var binding: ActivityMainBinding;
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory;
 
+
+    lateinit var movieViewModel: MovieListViewModel;
+
+
+    override fun initViewBinding() {
+        binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        setContentView(binding.root)
+    }
+
+    override fun injectActivity(baseActivity: BaseActivity) {
+        MyApp.getInstance().getMovieComponent().inject(this)
+    }
+
+    override fun initializeViewModel() {
+        movieViewModel =
+            ViewModelProvider(this, viewModelFactory).get(MovieListViewModel::class.java);
+
+    }
+
+    private fun handleMovieList(result: Result<List<Movie>>) {
+        when (result) {
+            is Result.Success -> {
+                showLoadingProgrss(false)
+                bindListData(result.data!!)
+            }
+            is Result.NetworkGeneralError -> {
+                showLoadingProgrss(false)
+                Toast.makeText(this, "faild " + result.msg, Toast.LENGTH_LONG).show();
+            }
+            is Result.InProgrss -> {
+                showLoadingProgrss(true)
+                Toast.makeText(this, "InProgrss", Toast.LENGTH_LONG).show();
+            }
+            is Result.NetworkNoInternetError -> {
+                showLoadingProgrss(false)
+                Toast.makeText(this, "No Internet Connection", Toast.LENGTH_LONG).show();
+
+            }
+        }
+
+    }
+
+    override fun observeViewModel() {
+        observe(movieViewModel.getMovieLiveData(), ::handleMovieList)
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        MyApp.getInstance().getMovieComponent().Inject(this);
-
-
-        val movieViewModel =
-            ViewModelProvider(this, viewModelFactory).get(DisplayMovieViewModel::class.java);
-        movieViewModel.getMovieLiveData().observe(this, Observer {
-
-            rvMovies.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-
-            when (it) {
-                is Result.Success -> {
-                    showProgrss(false)
-                    rvMovies.adapter = MovieAdapter(it.data!!);
-                }
-                is Result.Fail -> {
-                    showProgrss(false)
-                    Toast.makeText(this, "faild "+it.msg, Toast.LENGTH_LONG).show();
-                }
-                is Result.InProgrss -> {
-                    showProgrss(true)
-                    Toast.makeText(this, "InProgrss", Toast.LENGTH_LONG).show();
-                }
-                is Result.NoInternetError ->{
-                    showProgrss(false)
-                    Toast.makeText(this, "No Internet Connection", Toast.LENGTH_LONG).show();
-
-                }
-            };
-
-
-        })
-        CoroutineScope(IO).launch {
-            movieViewModel.getMovieFromServer();
-        }
+        rvMovies.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        movieViewModel.getMovieFromServer();
 
 
     }
 
 
-    private fun showProgrss(isVisible: Boolean) {
+    private fun bindListData(list: List<Movie>) {
+        if (!(list.isNullOrEmpty())) {
+            rvMovies.adapter = MovieAdapter(list);
+            showDataView(true)
+        } else {
+            showDataView(false)
+        }
+    }
+
+
+    private fun showDataView(isVisible: Boolean) {
+        // tvNoData.visibility = if (isVisible) View.GONE else View.VISIBLE
+        rvMovies.visibility = if (isVisible) View.VISIBLE else View.GONE
+    }
+
+
+    private fun showLoadingProgrss(isVisible: Boolean) {
         progress.visibility = when (isVisible) {
             true -> View.VISIBLE
             false -> View.GONE
