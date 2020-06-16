@@ -8,10 +8,12 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.mj.movieexample.core.MyApp
 import com.mj.movieexample.data.model.Movie
 import com.mj.movieexample.databinding.ActivityMovieListBinding
 import com.mj.movieexample.ui.base.BaseActivity
+import com.mj.movieexample.ui.base.PaginationScrollListener
 import com.mj.movieexample.ui.component.movieList.movieAdapter.MovieAdapter
 import com.mj.movieexample.ui.component.movieList.viewModel.MovieListViewModel
 import com.mj.movieexample.ui.base.ViewModelFactory
@@ -21,7 +23,10 @@ import com.mj.movieexample.util.*;
 import kotlinx.android.synthetic.main.activity_movie_list.*
 import javax.inject.Inject
 
-class MovieListActivity : BaseActivity() , RecyclerItemListener {
+class MovieListActivity : BaseActivity(), RecyclerItemListener {
+    //var isLastPage: Boolean = false
+    var isLoading: Boolean = false
+
 
     lateinit var binding: ActivityMovieListBinding;
 
@@ -31,6 +36,7 @@ class MovieListActivity : BaseActivity() , RecyclerItemListener {
 
     lateinit var movieViewModel: MovieListViewModel;
 
+    lateinit var linearLayoutManager: LinearLayoutManager;
 
     override fun initViewBinding() {
         binding = ActivityMovieListBinding.inflate(layoutInflater)
@@ -38,7 +44,6 @@ class MovieListActivity : BaseActivity() , RecyclerItemListener {
     }
 
     override fun initToolBar() {
-        setTitle("get data activity")
         setSettingsIconVisibility(false)
         setRefreshVisibility(false)
     }
@@ -54,17 +59,21 @@ class MovieListActivity : BaseActivity() , RecyclerItemListener {
     }
 
     private fun handleMovieList(result: Result<List<Movie>>) {
+        isLoading = false
         when (result) {
             is Result.Success -> {
                 showLoadingProgrss(false)
                 bindListData(result.data!!)
+                setTitle("" + result.data.size)
+                Log.e("size", "" + result.data.size)
             }
             is Result.NetworkGeneralError -> {
                 showLoadingProgrss(false)
                 Toast.makeText(this, "faild " + result.msg, Toast.LENGTH_LONG).show();
             }
             is Result.InProgrss -> {
-                Log.e("done","done");
+                isLoading = true;
+                Log.e("done", "done");
                 showLoadingProgrss(true)
                 Toast.makeText(this, "InProgrss", Toast.LENGTH_LONG).show();
             }
@@ -78,14 +87,30 @@ class MovieListActivity : BaseActivity() , RecyclerItemListener {
     }
 
     override fun observeViewModel() {
-        observe(movieViewModel.getMovieLiveData(),::handleMovieList)
+        observe(movieViewModel.getMovieResultLiveData(), ::handleMovieList)
     }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        rvMovies.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        linearLayoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        rvMovies.layoutManager = linearLayoutManager;
         movieViewModel.getMovieFromServer();
+        setRecyclerViewScrollListener()
+    }
+
+
+    private fun setRecyclerViewScrollListener() {
+        rvMovies?.addOnScrollListener(object : PaginationScrollListener(linearLayoutManager) {
+            override fun isLoading(): Boolean {
+                return isLoading
+            }
+
+            override fun loadMoreItems() {
+                isLoading = true
+                movieViewModel.getMovieFromServer()
+            }
+        })
 
 
     }
@@ -93,7 +118,7 @@ class MovieListActivity : BaseActivity() , RecyclerItemListener {
 
     private fun bindListData(list: List<Movie>) {
         if (!(list.isNullOrEmpty())) {
-            rvMovies.adapter = MovieAdapter(list,this);
+            rvMovies.adapter = MovieAdapter(list, this);
             showDataView(true)
         } else {
             showDataView(false)
@@ -116,10 +141,9 @@ class MovieListActivity : BaseActivity() , RecyclerItemListener {
 
     override fun onItemSelected(movie: Movie) {
 
-        val intent=Intent(this,MovieDetailsActivity::class.java)
-        intent.putExtra(Constants.Movie_ITEM_KEY,movie);
+        val intent = Intent(this, MovieDetailsActivity::class.java)
+        intent.putExtra(Constants.Movie_ITEM_KEY, movie);
         startActivity(intent);
-
     }
 
 

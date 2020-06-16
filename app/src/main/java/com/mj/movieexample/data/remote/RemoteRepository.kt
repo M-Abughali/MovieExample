@@ -19,9 +19,9 @@ class RemoteRepository @Inject constructor(val movieApiServices: MovieApiService
         return mutableLiveData;
     }
 
-    fun getAllMovies(): MutableLiveData<Result<List<Movie>>> {
+    fun getAllMovies(page: String) {
 
-        movieApiServices.getMovies("1").enqueue(object : Callback<MovieResult> {
+        movieApiServices.getMovies(page).enqueue(object : Callback<MovieResult> {
             override fun onFailure(call: Call<MovieResult>, t: Throwable) {
                 when (t) {
                     is NoInternetException -> mutableLiveData.postValue(Result.NetworkNoInternetError);
@@ -40,9 +40,7 @@ class RemoteRepository @Inject constructor(val movieApiServices: MovieApiService
         });
 
 
-    return mutableLiveData
-
-}
+    }
 
 
 }
