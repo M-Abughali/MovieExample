@@ -1,11 +1,5 @@
 package com.mj.movieexample.util
 
-import android.content.Context
-import android.content.SharedPreferences
-import androidx.security.crypto.EncryptedSharedPreferences
-import androidx.security.crypto.MasterKeys
-
-
 class Constants {
 
     companion object INSTANCE {
