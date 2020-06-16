@@ -10,26 +10,15 @@ import com.mj.movieexample.ui.base.BaseActivity
 import com.mj.movieexample.ui.component.movieList.MovieListActivity
 import com.mj.movieexample.util.Constants
 
-class SplashActivity : BaseActivity() {
+class SplashActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySplashBinding;
-    override fun injectActivity(baseActivity: BaseActivity) {
 
-    }
-
-    override fun initializeViewModel() {}
-
-    override fun observeViewModel() {}
-
-    override fun initViewBinding() {
-        binding=ActivitySplashBinding.inflate(layoutInflater);
-        setContentView(binding.root)
-    }
-
-    override fun initToolBar() {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding=ActivitySplashBinding.inflate(layoutInflater);
+        setContentView(binding.root)
         navigateToMainScreen()
     }
 

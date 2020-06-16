@@ -9,11 +9,6 @@
         android:orientation="vertical"
         tools:context=".ui.component.splash.SplashActivity">
 
-        <include
-            android:id="@+id/toolbar_layout"
-            layout="@layout/toolbar"
-            android:visibility="gone"
-            />
 
 
         <ImageView

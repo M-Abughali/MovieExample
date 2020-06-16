@@ -1,10 +1,4 @@
 
-d
-4app/src/main/res/drawable/ic_launcher_background.xml,4\9\49845c622cb06d895975c7b1e3f943e320bce688
-b
-2app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml,8\e\8e27ba16c655f421171956147d0fde89b7d25d17
-h
-8app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml,6\e\6ec7d34b130497a10dc92abcde9b313d370a89df
 w
 Gapp/src/androidTest/java/com/mj/movieexample/ExampleInstrumentedTest.kt,5\e\5e7e95e2de3684740fc4ad76d747dfe530b33f79
 h
@@ -56,8 +50,6 @@ t
 Dapp/src/main/java/com/mj/movieexample/ui/movieAdapter/viewHolder2.kt,e\d\ed5236cd8766158a52f7d24d639208873cb2bf6a
 g
 7app/src/main/java/com/mj/movieexample/util/Constants.kt,8\f\8fa6b24782e4dc9aae1128b66be9bbd5600cb3f4
-Y
-)app/src/main/res/navigation/nav_graph.xml,b\a\baffce053da291d96fb575a09f2bbe9aaa9c4be9
 u
 Eapp/src/main/java/com/mj/movieexample/ui/movieAdapter/MovieAdapter.kt,b\a\bade8110ed8661cc9d5068c0262798e51fbc22e0
 o
@@ -86,8 +78,6 @@ q
 Aapp/src/main/java/com/mj/movieexample/network/ServiceGenerator.kt,f\a\fa5a66963e6c0d4017d9d80f7895f638548e3d57
 n
 >app/src/main/java/com/mj/movieexample/ui/base/BaseViewModel.kt,9\3\93f7d784e109932652c81aa5c9bcd32b1376b91d
-U
-%app/src/main/res/layout/row_item2.xml,f\3\f333eda82a43b0591a113c3dac354865f4a057b1
 
 Oapp/src/main/java/com/mj/movieexample/ui/base/listeners/RecyclerItemListener.kt,7\3\73eb3be3fa13f201aa058719abc322a08bf69ded
 x
