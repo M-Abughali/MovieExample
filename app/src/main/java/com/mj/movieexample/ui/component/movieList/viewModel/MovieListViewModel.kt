@@ -19,10 +19,8 @@ class MovieListViewModel @Inject constructor(val repository: RemoteRepository) :
     }
 
     fun getMovieFromServer() {
-        Log.e("get from server","getMovieFromServer");
         CoroutineScope(Dispatchers.IO).launch {
             movieLiveData.postValue(Result.InProgrss);
-           // delay(10000)
             movieLiveData.postValue(repository.getAllMovies().value)
         }
     }

@@ -33,7 +33,7 @@ class MovieAdapter(val list: List<Movie>,val recyclerItemListener: RecyclerItemL
                 parent,
                 false
             )
-            return viewHolder(rowItemBinding,recyclerItemListener);
+            return MovieViewHolder(rowItemBinding,recyclerItemListener);
         } else {
             val rowItemBinding2 = DataBindingUtil.inflate<RowItem2Binding>(
                 LayoutInflater.from(parent.context),
@@ -41,7 +41,7 @@ class MovieAdapter(val list: List<Movie>,val recyclerItemListener: RecyclerItemL
                 parent,
                 false
             )
-            return viewHolder2(rowItemBinding2,recyclerItemListener);
+            return MovieViewHolder2(rowItemBinding2,recyclerItemListener);
         }
 
     }
@@ -53,11 +53,11 @@ class MovieAdapter(val list: List<Movie>,val recyclerItemListener: RecyclerItemL
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         if (holder.itemViewType == VIEW_TYPE1) {
-            holder as viewHolder
+            holder as MovieViewHolder
             holder.bind(list.get(position))
 
         } else if (holder.itemViewType == VIEW_TYPE2) {
-            holder as viewHolder2
+            holder as MovieViewHolder2
             holder.bind(list.get(position))
 
         }

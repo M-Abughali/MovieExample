@@ -38,7 +38,6 @@ class MovieListActivity : BaseActivity() , RecyclerItemListener {
     }
 
     override fun initToolBar() {
-       // setUpIconVisibility(true)
         setTitle("get data activity")
         setSettingsIconVisibility(false)
         setRefreshVisibility(false)

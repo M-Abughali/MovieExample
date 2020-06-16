@@ -17,20 +17,16 @@ class SplashActivity : BaseActivity() {
 
     }
 
-    override fun initializeViewModel() {
-    }
+    override fun initializeViewModel() {}
 
-    override fun observeViewModel() {
-    }
+    override fun observeViewModel() {}
 
     override fun initViewBinding() {
         binding=ActivitySplashBinding.inflate(layoutInflater);
         setContentView(binding.root)
     }
 
-    override fun initToolBar() {
-
-    }
+    override fun initToolBar() {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

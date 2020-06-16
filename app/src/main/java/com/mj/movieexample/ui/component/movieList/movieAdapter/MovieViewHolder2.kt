@@ -8,7 +8,7 @@ import com.mj.movieexample.ui.base.listeners.RecyclerItemListener
 import com.mj.movieexample.util.Constants
 import com.squareup.picasso.Picasso
 
-class viewHolder2(
+class MovieViewHolder2(
     val rowItemBinding: RowItem2Binding,
     val recyclerItemListener: RecyclerItemListener?
 ) :
