@@ -1,6 +1,6 @@
 package com.mj.movieexample.di.module
 import androidx.lifecycle.ViewModel
-import com.mj.movieexample.ui.viewModel.MovieListViewModel
+import com.mj.movieexample.ui.component.movieList.viewModel.MovieListViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

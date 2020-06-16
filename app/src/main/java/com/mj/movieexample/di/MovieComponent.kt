@@ -1,13 +1,11 @@
 package com.mj.movieexample.di
 
 import android.app.Application
-import com.mj.movieexample.core.MyApp
-import com.mj.movieexample.di.module.AppModule
 import com.mj.movieexample.di.module.RepositoryModule
 import com.mj.movieexample.di.module.RetrofitServiceModule
 import com.mj.movieexample.di.module.ViewModelModule
-import com.mj.movieexample.ui.MainActivity
-import dagger.Binds
+import com.mj.movieexample.ui.component.movieDetails.MovieDetailsActivity
+import com.mj.movieexample.ui.component.movieList.MovieListActivity
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -19,7 +17,8 @@ import javax.inject.Singleton
     ]
 )
 interface MovieComponent {
-    fun inject(mainActivity: MainActivity)
+    fun inject(movieListActivity: MovieListActivity)
+    fun inject(movieDetailsActivity: MovieDetailsActivity)
 
 
     @Component.Builder

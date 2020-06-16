@@ -34,10 +34,6 @@ constructor() {
         retrofit = Retrofit.Builder().baseUrl(BASE_URL).client(client)
             .addConverterFactory(GsonConverterFactory.create()).build()
 
-        /*   retrofit = Retrofit.Builder()
-               .baseUrl(BASE_URL).client(client)
-               .addConverterFactory(MoshiConverterFactory.create())
-               .build()*/
     }
 
     fun <S> createService(serviceClass: Class<S>): S {

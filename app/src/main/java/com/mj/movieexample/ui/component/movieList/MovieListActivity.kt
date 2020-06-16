@@ -1,32 +1,29 @@
-package com.mj.movieexample.ui
+package com.mj.movieexample.ui.component.movieList
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mj.movieexample.core.MyApp
-import com.mj.movieexample.R
 import com.mj.movieexample.data.model.Movie
-import com.mj.movieexample.databinding.ActivityMainBinding
+import com.mj.movieexample.databinding.ActivityMovieListBinding
 import com.mj.movieexample.ui.base.BaseActivity
-import com.mj.movieexample.ui.movieAdapter.MovieAdapter
-import com.mj.movieexample.ui.viewModel.MovieListViewModel
-import com.mj.movieexample.ui.viewModel.ViewModelFactory
+import com.mj.movieexample.ui.component.movieList.movieAdapter.MovieAdapter
+import com.mj.movieexample.ui.component.movieList.viewModel.MovieListViewModel
+import com.mj.movieexample.ui.base.ViewModelFactory
+import com.mj.movieexample.ui.base.listeners.RecyclerItemListener
+import com.mj.movieexample.ui.component.movieDetails.MovieDetailsActivity
 import com.mj.movieexample.util.*;
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
+import kotlinx.android.synthetic.main.activity_movie_list.*
 import javax.inject.Inject
 
-class MainActivity : BaseActivity() {
+class MovieListActivity : BaseActivity() , RecyclerItemListener {
 
-    lateinit var binding: ActivityMainBinding;
+    lateinit var binding: ActivityMovieListBinding;
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory;
@@ -36,15 +33,15 @@ class MainActivity : BaseActivity() {
 
 
     override fun initViewBinding() {
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMovieListBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 
     override fun initToolBar() {
        // setUpIconVisibility(true)
         setTitle("get data activity")
-        setSettingsIconVisibility(true)
-        setRefreshVisibility(true)
+        setSettingsIconVisibility(false)
+        setRefreshVisibility(false)
     }
 
     override fun injectActivity(baseActivity: BaseActivity) {
@@ -68,6 +65,7 @@ class MainActivity : BaseActivity() {
                 Toast.makeText(this, "faild " + result.msg, Toast.LENGTH_LONG).show();
             }
             is Result.InProgrss -> {
+                Log.e("done","done");
                 showLoadingProgrss(true)
                 Toast.makeText(this, "InProgrss", Toast.LENGTH_LONG).show();
             }
@@ -81,14 +79,12 @@ class MainActivity : BaseActivity() {
     }
 
     override fun observeViewModel() {
-        observe(movieViewModel.getMovieLiveData(), ::handleMovieList)
+        observe(movieViewModel.getMovieLiveData(),::handleMovieList)
     }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
         rvMovies.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         movieViewModel.getMovieFromServer();
 
@@ -98,7 +94,7 @@ class MainActivity : BaseActivity() {
 
     private fun bindListData(list: List<Movie>) {
         if (!(list.isNullOrEmpty())) {
-            rvMovies.adapter = MovieAdapter(list);
+            rvMovies.adapter = MovieAdapter(list,this);
             showDataView(true)
         } else {
             showDataView(false)
@@ -118,5 +114,14 @@ class MainActivity : BaseActivity() {
             false -> View.GONE
         }
     }
+
+    override fun onItemSelected(movie: Movie) {
+
+        val intent=Intent(this,MovieDetailsActivity::class.java)
+        intent.putExtra(Constants.Movie_ITEM_KEY,movie);
+        startActivity(intent);
+
+    }
+
 
 }

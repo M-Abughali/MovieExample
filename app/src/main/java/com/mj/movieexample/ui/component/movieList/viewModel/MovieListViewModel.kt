@@ -1,14 +1,13 @@
-package com.mj.movieexample.ui.viewModel
+package com.mj.movieexample.ui.component.movieList.viewModel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.mj.movieexample.data.model.Movie
 import com.mj.movieexample.data.remote.RemoteRepository
 import com.mj.movieexample.util.Result
 import com.task.ui.base.BaseViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,9 +19,10 @@ class MovieListViewModel @Inject constructor(val repository: RemoteRepository) :
     }
 
     fun getMovieFromServer() {
+        Log.e("get from server","getMovieFromServer");
         CoroutineScope(Dispatchers.IO).launch {
             movieLiveData.postValue(Result.InProgrss);
-            delay(3000)
+           // delay(10000)
             movieLiveData.postValue(repository.getAllMovies().value)
         }
     }

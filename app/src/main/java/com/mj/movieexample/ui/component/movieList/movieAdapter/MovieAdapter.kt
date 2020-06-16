@@ -1,4 +1,4 @@
-package com.mj.movieexample.ui.movieAdapter
+package com.mj.movieexample.ui.component.movieList.movieAdapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,11 +8,13 @@ import com.mj.movieexample.R
 import com.mj.movieexample.databinding.RowItem2Binding
 import com.mj.movieexample.databinding.RowItemBinding
 import com.mj.movieexample.data.model.Movie
+import com.mj.movieexample.ui.base.listeners.RecyclerItemListener
 
-class MovieAdapter(val list: List<Movie>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MovieAdapter(val list: List<Movie>,val recyclerItemListener: RecyclerItemListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private final val VIEW_TYPE1 = 1;
     private final val VIEW_TYPE2 = 2;
+
 
 
     override fun getItemViewType(position: Int): Int {
@@ -31,7 +33,7 @@ class MovieAdapter(val list: List<Movie>) : RecyclerView.Adapter<RecyclerView.Vi
                 parent,
                 false
             )
-            return viewHolder(rowItemBinding);
+            return viewHolder(rowItemBinding,recyclerItemListener);
         } else {
             val rowItemBinding2 = DataBindingUtil.inflate<RowItem2Binding>(
                 LayoutInflater.from(parent.context),
@@ -39,7 +41,7 @@ class MovieAdapter(val list: List<Movie>) : RecyclerView.Adapter<RecyclerView.Vi
                 parent,
                 false
             )
-            return viewHolder2(rowItemBinding2);
+            return viewHolder2(rowItemBinding2,recyclerItemListener);
         }
 
     }
