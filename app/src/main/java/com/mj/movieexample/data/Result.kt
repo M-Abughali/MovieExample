@@ -1,4 +1,4 @@
-package com.mj.movieexample.util
+package com.mj.movieexample.data
 
 sealed class Result<out T : Any> {
 

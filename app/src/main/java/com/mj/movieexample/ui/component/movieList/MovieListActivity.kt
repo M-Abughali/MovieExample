@@ -8,8 +8,9 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.OnScrollListener
+import com.mj.movieexample.R
 import com.mj.movieexample.core.MyApp
+import com.mj.movieexample.data.Result
 import com.mj.movieexample.data.model.Movie
 import com.mj.movieexample.databinding.ActivityMovieListBinding
 import com.mj.movieexample.ui.base.BaseActivity
@@ -31,7 +32,6 @@ class MovieListActivity : BaseActivity(), RecyclerItemListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory;
-
 
     lateinit var movieViewModel: MovieListViewModel;
 
@@ -64,21 +64,19 @@ class MovieListActivity : BaseActivity(), RecyclerItemListener {
                 showLoadingProgrss(false)
                 bindListData(result.data!!)
                 setTitle("" + result.data.size)
-                Log.e("size", "" + result.data.size)
             }
             is Result.NetworkGeneralError -> {
                 showLoadingProgrss(false)
-                Toast.makeText(this, "faild " + result.msg, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, result.msg, Toast.LENGTH_LONG).show();
             }
             is Result.InProgrss -> {
                 isLoading = true;
-                Log.e("done", "done");
                 showLoadingProgrss(true)
-                Toast.makeText(this, "InProgrss", Toast.LENGTH_LONG).show();
             }
             is Result.NetworkNoInternetError -> {
                 showLoadingProgrss(false)
-                Toast.makeText(this, "No Internet Connection", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.lbl_no_error_connection), Toast.LENGTH_LONG)
+                    .show();
 
             }
         }

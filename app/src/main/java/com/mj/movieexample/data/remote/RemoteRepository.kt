@@ -1,10 +1,12 @@
 package com.mj.movieexample.data.remote
 
 import androidx.lifecycle.MutableLiveData
+import com.mj.movieexample.R
+import com.mj.movieexample.core.MyApp
 import com.mj.movieexample.data.model.Movie
 import com.mj.movieexample.data.model.MovieResult
 import com.mj.movieexample.network.NoInternetException
-import com.mj.movieexample.util.Result
+import com.mj.movieexample.data.Result
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,14 +21,19 @@ class RemoteRepository @Inject constructor(val movieApiServices: MovieApiService
         return mutableLiveData;
     }
 
-    fun getAllMovies(page: String) {
+     fun getAllMovies(page: String) {
 
         movieApiServices.getMovies(page).enqueue(object : Callback<MovieResult> {
             override fun onFailure(call: Call<MovieResult>, t: Throwable) {
                 when (t) {
                     is NoInternetException -> mutableLiveData.postValue(Result.NetworkNoInternetError);
                     else -> {
-                        mutableLiveData.postValue(Result.NetworkGeneralError("msg" + t.message));
+                        mutableLiveData.postValue(
+                            Result.NetworkGeneralError(
+                                MyApp.getInstance()
+                                    .getString(R.string.lbl_no_error_connection) + " " + t.message
+                            )
+                        );
 
                     }
                 }
@@ -34,7 +41,12 @@ class RemoteRepository @Inject constructor(val movieApiServices: MovieApiService
 
             override fun onResponse(call: Call<MovieResult>, response: Response<MovieResult>) {
 
-                mutableLiveData.postValue(Result.Success(response.body()?.results, "done"));
+                mutableLiveData.postValue(
+                    Result.Success(
+                        response.body()?.results,
+                        MyApp.getInstance().getString(R.string.lbl_no_error_connection)
+                    )
+                );
 
             }
         });
