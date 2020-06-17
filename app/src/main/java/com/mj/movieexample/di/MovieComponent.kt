@@ -3,6 +3,7 @@ package com.mj.movieexample.di
 import android.app.Application
 import com.mj.movieexample.di.module.RepositoryModule
 import com.mj.movieexample.di.module.RetrofitServiceModule
+import com.mj.movieexample.di.module.RxModule
 import com.mj.movieexample.di.module.ViewModelModule
 import com.mj.movieexample.ui.component.movieDetails.MovieDetailsActivity
 import com.mj.movieexample.ui.component.movieList.MovieListActivity
@@ -13,7 +14,7 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(
-    modules = [RetrofitServiceModule::class, RepositoryModule::class, ViewModelModule::class
+    modules = [RetrofitServiceModule::class, RepositoryModule::class, ViewModelModule::class, RxModule::class
     ]
 )
 interface MovieComponent {

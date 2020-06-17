@@ -34,8 +34,6 @@ s
 Capp/src/main/java/com/mj/movieexample/di/module/RepositoryModule.kt,7\b\7b9ad7ec4b9436e9f51e42a65ed9e7806afed716
 j
 :app/src/main/java/com/mj/movieexample/di/MovieComponent.kt,6\2\62bc38aa172a14eb9d616041c04c877db6277a98
-d
-4app/src/main/java/com/mj/movieexample/util/Result.kt,a\5\a53675a6683ec993665ba97896f6b5d90a0468f7
 P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
 @
@@ -100,3 +98,5 @@ Yapp/src/main/java/com/mj/movieexample/ui/component/movieList/movieAdapter/Movie
 Qapp/src/main/java/com/mj/movieexample/ui/component/movieList/MovieListActivity.kt,d\8\d89be7700809f386391607837267668f8ee99882
 ‡
 Wapp/src/main/java/com/mj/movieexample/ui/component/movieDetails/MovieDetailsActivity.kt,8\7\873fe384677f98fcd93a0af6677515b4fe5574ca
+d
+4app/src/main/java/com/mj/movieexample/data/Result.kt,b\f\bf9ccc1c12c84a254fa3c51dfe1076db90737b83

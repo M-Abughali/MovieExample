@@ -84,7 +84,7 @@ class MovieListActivity : BaseActivity(), RecyclerItemListener {
     }
 
     override fun observeViewModel() {
-        observe(movieViewModel.getMovieResultLiveData(), ::handleMovieList)
+        observe(movieViewModel.getLiveData(), ::handleMovieList)
     }
 
 

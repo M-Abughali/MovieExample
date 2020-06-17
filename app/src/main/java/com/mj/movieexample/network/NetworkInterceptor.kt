@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import com.mj.movieexample.BuildConfig
+import com.mj.movieexample.util.Constants.INSTANCE.NO_INTERNET_CONNECTION_MSG
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.util.*
@@ -40,7 +41,7 @@ class NetworkInterceptor @Inject constructor(val application: Application) : Int
 
 
         if (!isInternetAvailable())
-            throw  NoInternetException("noInternt")
+            throw  NoInternetException(NO_INTERNET_CONNECTION_MSG)
 
         return chain.proceed(request)
 
