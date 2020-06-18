@@ -1,5 +1,4 @@
-# movieExample
-<h1>Android-MVVM-with-Retrofit</h1>
+# Android-MVVM-with-Retrofit
 This is sample project to express how to use Android MVVM architecture and Jetpack components
 <br/>
 Idea => app that fetch movies from Mdbi API
