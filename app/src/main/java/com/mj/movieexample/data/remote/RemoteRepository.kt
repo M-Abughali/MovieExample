@@ -24,8 +24,10 @@ class RemoteRepository @Inject constructor(val movieApiServices: MovieApiService
 
     fun getMovies(page: String): Single<MovieResult> {
         return movieApiServices.getMovies("" + page);
+    }
 
-
+    fun searchMovies(page: String,keyword:String): Single<MovieResult> {
+        return movieApiServices.searchMovies("" + page,keyword);
     }
 
 }
