@@ -1,5 +1,6 @@
 package com.mj.movieexample.ui.component.movieList.viewModel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mj.movieexample.R
@@ -20,19 +21,23 @@ class MovieListViewModel @Inject constructor(
 ) : BaseViewModel() {
 
 
-    private var totalMoviesData = MutableLiveData<ArrayList<Movie>>();
-    private var movieResultLiveData = MutableLiveData<Result<List<Movie>>>();
-    private var moviePageLiveData = MutableLiveData<Int>();
+    private var totalMoviesData = MutableLiveData<ArrayList<Movie>>()
+    private var movieResultLiveDataPrivate = MutableLiveData<Result<List<Movie>>>()
+    private var moviePageLiveDataPrivate = MutableLiveData<Int>()
+
+    private val movieResultLiveData: LiveData<Result<List<Movie>>> get() = movieResultLiveDataPrivate
+    private val moviePageLiveData: LiveData<Int> get() = moviePageLiveDataPrivate
 
 
     init {
         totalMoviesData.value = ArrayList<Movie>()
-        moviePageLiveData.value = 1
+        moviePageLiveDataPrivate.value = 1
     }
 
 
+       @Inject
     fun getMovieFromServer() {
-        disposable = repository.getMovies(moviePageLiveData.value.toString())
+        disposable = repository.getMovies(moviePageLiveDataPrivate.value.toString())
             .compose(rxSingleSchedulers.applySchedulers())
             .doOnSubscribe { o -> onLoading(o) }
             .subscribe(
@@ -41,20 +46,20 @@ class MovieListViewModel @Inject constructor(
     }
 
     fun changeMoviePage() {
-        val currentPage = moviePageLiveData.value!!;
-        moviePageLiveData.postValue(currentPage + 1)
+        val currentPage = moviePageLiveDataPrivate.value!!
+        moviePageLiveDataPrivate.postValue(currentPage + 1)
     }
 
 
     override fun onLoading(disposable: Disposable?) {
-        movieResultLiveData.postValue(Result.InProgrss)
+        movieResultLiveDataPrivate.postValue(Result.InProgrss)
     }
 
     override fun onSuccess(it: MovieResult?) {
-        totalMoviesData.value!!.addAll(it!!.results)
-        movieResultLiveData.postValue(
+        totalMoviesData.value?.addAll(it!!.results)
+        movieResultLiveDataPrivate.postValue(
             Result.Success(
-                totalMoviesData.value,
+                it?.results,
                 SUCCESS_MSG
             )
         )
@@ -63,21 +68,31 @@ class MovieListViewModel @Inject constructor(
 
     override fun onError(throwable: Throwable?) {
         when (throwable) {
-            is NoInternetException -> movieResultLiveData.postValue(Result.NetworkNoInternetError);
-            else -> {
-                movieResultLiveData.postValue(
-                    Result.NetworkGeneralError(
-                        GENERAL_ERROR_MSG
-                    )
-                );
-
-            }
+            is NoInternetException -> movieResultLiveDataPrivate.postValue(Result.NetworkNoInternetError)
+            else -> movieResultLiveDataPrivate.postValue(
+                Result.NetworkGeneralError(
+                    GENERAL_ERROR_MSG
+                )
+            )
         }
     }
 
+    private fun postAllDataIfStateChanged(){
+        movieResultLiveDataPrivate.postValue(
+            Result.Success(
+                totalMoviesData.value,
+                SUCCESS_MSG
+            )
+        )
+    }
     public override fun getLiveData(): LiveData<Result<List<Movie>>> {
-        return movieResultLiveData;
+        postAllDataIfStateChanged()
+        return movieResultLiveData
     }
 
+    fun getPageLiveData(): LiveData<Int> {
 
+
+        return moviePageLiveData
+    }
 }

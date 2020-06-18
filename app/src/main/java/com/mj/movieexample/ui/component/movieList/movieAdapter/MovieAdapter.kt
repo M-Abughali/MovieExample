@@ -12,13 +12,13 @@ import com.mj.movieexample.ui.base.listeners.RecyclerItemListener
 
 class MovieAdapter(val recyclerItemListener: RecyclerItemListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var list: ArrayList<Movie> = ArrayList<Movie>();
-    private  val VIEW_TYPE1 = 1;
-    private  val VIEW_TYPE2 = 2;
+    var list: ArrayList<Movie> = ArrayList<Movie>()
+    private val VIEW_TYPE1 = 1
+    private val VIEW_TYPE2 = 2
 
 
     fun setItems(list: List<Movie>) {
-        this.list.clear()
+        // this.list.clear()
         this.list.addAll(list)
 
     }
@@ -39,7 +39,7 @@ class MovieAdapter(val recyclerItemListener: RecyclerItemListener) :
                 parent,
                 false
             )
-            return MovieViewHolder(rowItemBinding, recyclerItemListener);
+            return MovieViewHolder(rowItemBinding, recyclerItemListener)
         } else {
             val rowItemBinding2 = DataBindingUtil.inflate<RowItem2Binding>(
                 LayoutInflater.from(parent.context),
@@ -47,13 +47,13 @@ class MovieAdapter(val recyclerItemListener: RecyclerItemListener) :
                 parent,
                 false
             )
-            return MovieViewHolder2(rowItemBinding2, recyclerItemListener);
+            return MovieViewHolder2(rowItemBinding2, recyclerItemListener)
         }
 
     }
 
     override fun getItemCount(): Int {
-        return list.size;
+        return list.size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

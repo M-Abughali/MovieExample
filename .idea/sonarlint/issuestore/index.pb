@@ -1,8 +1,6 @@
 
 w
 Gapp/src/androidTest/java/com/mj/movieexample/ExampleInstrumentedTest.kt,5\e\5e7e95e2de3684740fc4ad76d747dfe530b33f79
-h
-8app/src/test/java/com/mj/movieexample/ExampleUnitTest.kt,a\3\a3dfca75382d64aefaeee8ac2a87311867cf685c
 >
 app/.gitignore,5\1\51e1c5d383dfaa35e0e7e5873a0a99355a86880f
 F
@@ -100,3 +98,15 @@ Qapp/src/main/java/com/mj/movieexample/ui/component/movieList/MovieListActivity.
 Wapp/src/main/java/com/mj/movieexample/ui/component/movieDetails/MovieDetailsActivity.kt,8\7\873fe384677f98fcd93a0af6677515b4fe5574ca
 d
 4app/src/main/java/com/mj/movieexample/data/Result.kt,b\f\bf9ccc1c12c84a254fa3c51dfe1076db90737b83
+u
+Eapp/src/main/java/com/mj/movieexample/network/RxSingleSchedulers.java,a\e\aed6edba7df065d322e0843a20b8fafc989f390d
+
+`app/src/test/java/com/mj/movieexample/ui/component/movieList/viewModel/MovieListViewModelTest.kt,9\e\9ecb6a970d54ebdeca8ebc653ef0c6fa665b6a8c
+y
+Iapp/src/test/java/com/mj/movieexample/data/remote/RemoteRepositoryTest.kt,f\0\f0c526fff450c3e643b621ae4cb1bf27e61cabe9
+v
+Fapp/src/test/java/com/mj/movieexample/util/InstantExecutorExtension.kt,3\b\3be0a262caf460bf7ae93138339d66ffd5c17aeb
+n
+>app/src/test/java/com/mj/movieexample/util/LiveDataTestUtil.kt,d\3\d3d0b84b843159b3e1d57ca190128962fdb0edef
+o
+?app/src/test/java/com/mj/movieexample/util/MainCoroutineRule.kt,2\4\243feb034e44dff484e5b3ca046e71ec1981d71f

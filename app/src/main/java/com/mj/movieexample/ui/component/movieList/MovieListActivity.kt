@@ -20,22 +20,22 @@ import com.mj.movieexample.ui.component.movieList.viewModel.MovieListViewModel
 import com.mj.movieexample.ui.base.ViewModelFactory
 import com.mj.movieexample.ui.base.listeners.RecyclerItemListener
 import com.mj.movieexample.ui.component.movieDetails.MovieDetailsActivity
-import com.mj.movieexample.util.*;
+import com.mj.movieexample.util.*
 import kotlinx.android.synthetic.main.activity_movie_list.*
 import javax.inject.Inject
 
 class MovieListActivity : BaseActivity(), RecyclerItemListener {
     var isLoading: Boolean = false
-    lateinit var movieAdapter: MovieAdapter;
+    lateinit var movieAdapter: MovieAdapter
 
-    lateinit var binding: ActivityMovieListBinding;
+    lateinit var binding: ActivityMovieListBinding
 
     @Inject
-    lateinit var viewModelFactory: ViewModelFactory;
+    lateinit var viewModelFactory: ViewModelFactory
 
-    lateinit var movieViewModel: MovieListViewModel;
+    lateinit var movieViewModel: MovieListViewModel
 
-    lateinit var linearLayoutManager: LinearLayoutManager;
+    lateinit var linearLayoutManager: LinearLayoutManager
 
     override fun initViewBinding() {
         binding = ActivityMovieListBinding.inflate(layoutInflater)
@@ -53,7 +53,7 @@ class MovieListActivity : BaseActivity(), RecyclerItemListener {
 
     override fun initializeViewModel() {
         movieViewModel =
-            ViewModelProvider(this, viewModelFactory).get(MovieListViewModel::class.java);
+            ViewModelProvider(this, viewModelFactory).get(MovieListViewModel::class.java)
 
     }
 
@@ -63,20 +63,20 @@ class MovieListActivity : BaseActivity(), RecyclerItemListener {
             is Result.Success -> {
                 showLoadingProgrss(false)
                 bindListData(result.data!!)
-                setTitle("" + result.data.size)
+                setTitle("" + rvMovies.adapter?.itemCount)
             }
             is Result.NetworkGeneralError -> {
                 showLoadingProgrss(false)
-                Toast.makeText(this, result.msg, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, result.msg, Toast.LENGTH_LONG).show()
             }
             is Result.InProgrss -> {
-                isLoading = true;
+                isLoading = true
                 showLoadingProgrss(true)
             }
             is Result.NetworkNoInternetError -> {
                 showLoadingProgrss(false)
                 Toast.makeText(this, getString(R.string.lbl_no_error_connection), Toast.LENGTH_LONG)
-                    .show();
+                    .show()
 
             }
         }
@@ -92,14 +92,14 @@ class MovieListActivity : BaseActivity(), RecyclerItemListener {
         super.onCreate(savedInstanceState)
         initRecyclerView()
         setRecyclerViewScrollListener()
-        movieViewModel.getMovieFromServer();
+       // movieViewModel.getMovieFromServer()
 
     }
 
     private fun initRecyclerView() {
-        linearLayoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        movieAdapter = MovieAdapter(this);
-        rvMovies.layoutManager = linearLayoutManager;
+        linearLayoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        movieAdapter = MovieAdapter(this)
+        rvMovies.layoutManager = linearLayoutManager
         rvMovies.adapter = movieAdapter
 
     }
@@ -122,7 +122,7 @@ class MovieListActivity : BaseActivity(), RecyclerItemListener {
 
     private fun bindListData(list: List<Movie>) {
         if (!(list.isNullOrEmpty())) {
-            movieAdapter.setItems(list);
+            movieAdapter.setItems(list)
             movieAdapter.notifyDataSetChanged()
             showDataView(true)
         } else {
@@ -147,8 +147,8 @@ class MovieListActivity : BaseActivity(), RecyclerItemListener {
     override fun onItemSelected(movie: Movie) {
 
         val intent = Intent(this, MovieDetailsActivity::class.java)
-        intent.putExtra(Constants.Movie_ITEM_KEY, movie);
-        startActivity(intent);
+        intent.putExtra(Constants.Movie_ITEM_KEY, movie)
+        startActivity(intent)
     }
 
 
