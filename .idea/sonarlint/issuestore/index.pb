@@ -88,8 +88,6 @@ y
 Iapp/src/main/java/com/mj/movieexample/ui/base/PaginationScrollListener.kt,2\7\27db60c661bea5b35101651794fd08534e1669c9
 å
 \app/src/main/java/com/mj/movieexample/ui/component/movieList/viewModel/MovieListViewModel.kt,1\f\1f4a451e9d2621c422f233d49ed37e9ea54292b8
-[
-+app/src/main/res/layout/activity_splash.xml,1\3\13b26b9b6631cddf289c5ab7c4e546a180da97d8
 â
 Yapp/src/main/java/com/mj/movieexample/ui/component/movieList/movieAdapter/MovieAdapter.kt,b\8\b82278553b4058e075bcaa46cfd108c14443458c
 Å
