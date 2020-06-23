@@ -1,7 +1,6 @@
 package com.mj.movieexample.data.remote
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.mj.movieexample.data.model.Movie
 import com.mj.movieexample.data.model.MovieResult
 import com.mj.movieexample.util.Constants
 import io.reactivex.Single
@@ -11,15 +10,8 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.junit.MockitoJUnitRunner
-
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.MatcherAssert.assertThat
-import org.junit.Assert
 import org.junit.Rule
 import org.junit.runners.JUnit4
-import org.mockito.ArgumentMatchers.any
-import org.mockito.Mockito
 import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import java.lang.Exception
@@ -48,22 +40,22 @@ class RemoteRepositoryTest {
     @Test
     fun `Fetch Data from retrofit api with Success result`() {
         // arrange
-        val returentObject = MovieResult(
+        val returnedObject = MovieResult(
             page = 1,
-            results = ArrayList<Movie>(),
+            results = ArrayList(),
             total_pages = 10,
             total_results = 10
         )
 
-        val expectedListView = Single.just(returentObject)
+        val expectedListView = Single.just(returnedObject)
 
         `when`(remoteRepository.getMovies("1")).thenReturn(expectedListView)
 
         //act
-        val returend: Single<MovieResult> = remoteRepository.getMovies("1")
+        val returned: Single<MovieResult> = remoteRepository.getMovies("1")
 
-        // verfiy
-        assertEquals(expectedListView, returend)
+        // verify
+        assertEquals(expectedListView, returned)
     }
 
 
@@ -74,10 +66,10 @@ class RemoteRepositoryTest {
         `when`(remoteRepository.getMovies("1")).thenReturn(expectedResult)
 
         //act
-        val returend: Single<MovieResult> = remoteRepository.getMovies("1")
+        val returned: Single<MovieResult> = remoteRepository.getMovies("1")
 
-        // verfiy
-        assertEquals(expectedResult, returend)
+        // verify
+        assertEquals(expectedResult, returned)
     }
 
 }

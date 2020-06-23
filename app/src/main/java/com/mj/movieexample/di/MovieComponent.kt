@@ -26,8 +26,8 @@ interface MovieComponent {
     interface Builder {
 
         @BindsInstance
-        fun injectApplication(application: Application): Builder;
+        fun injectApplication(application: Application): Builder
 
-        fun build(): MovieComponent;
+        fun build(): MovieComponent
     }
 }

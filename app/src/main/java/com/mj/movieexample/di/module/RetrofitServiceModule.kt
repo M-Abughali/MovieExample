@@ -9,7 +9,7 @@ import dagger.Provides
 class RetrofitServiceModule {
     @Provides
     fun getRetrofitService(retrofitGenerator: ServiceGenerator): MovieApiServices {
-        return retrofitGenerator.createService(MovieApiServices::class.java);
+        return retrofitGenerator.createService(MovieApiServices::class.java)
     }
 
 }

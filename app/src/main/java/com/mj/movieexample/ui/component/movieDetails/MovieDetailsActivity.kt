@@ -10,7 +10,7 @@ import com.mj.movieexample.util.Constants
 import com.squareup.picasso.Picasso
 
 class MovieDetailsActivity : BaseActivity() {
-    lateinit var binding: ActivityMovieDetailsBinding;
+    private lateinit var binding: ActivityMovieDetailsBinding
 
     override fun injectActivity(baseActivity: BaseActivity) {
         MyApp.getInstance().getMovieComponent().inject(this)
@@ -34,10 +34,10 @@ class MovieDetailsActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val movie = intent.extras?.getSerializable(Constants.Movie_ITEM_KEY) as Movie
-        binding.movieItem = movie;
+        binding.movieItem = movie
         Picasso.get().load(Constants.MAIN_IMAGE_URL + movie.poster_path)
             .error(R.drawable.error_image_place_holder)
-            .placeholder(R.drawable.image_place_holder).into(binding.movieImage);
+            .placeholder(R.drawable.image_place_holder).into(binding.movieImage)
 
 
     }

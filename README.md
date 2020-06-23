@@ -51,25 +51,25 @@ Idea => app that fetch movies from Mdbi API
 
 <html>
 <h2>Architecture</h2>
-<img src="img/mvvm_architecture.png"></img>
+<img src="img/mvvm_architecture.png"/>
 
 <h2>Screenshots</h2>
 <table border="1" bordercolor="red" align="center">
     <tr>
-        <td border=1 height=450 width=300><img src="img/Screenshot1.jpg"></img>
-        </th>
-        <td border=1 height=450 width=300><img src="img/Screenshot2.jpg"></img>
-        </th>
+        <td  height=450 width=300><img src="img/Screenshot1.jpg"/>
+        </td>
+        <td  height=450 width=300><img src="img/Screenshot2.jpg"/>
+        </td>
     </tr>
     <tr>
-        <td border=1 height=450 width=300><img src="img/Screenshot3.jpg"></img>
-        </th>
-        <td border=1 height=450 width=300><img src="img/Screenshot5.jpg"></img>
-        </th>
+        <td  height=450 width=300><img src="img/Screenshot3.jpg"/>
+        </td>
+        <td  height=450 width=300><img src="img/Screenshot5.jpg"/>
+        </td>
     </tr>
 
 </table>
-<td border=1 height=450 width=600><img src="img/Screenshot4.jpg"></img>
+<td  height=450 width=600><img src="img/Screenshot4.jpg"/>
 </td>
 
 </html>

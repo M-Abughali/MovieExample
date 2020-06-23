@@ -1,11 +1,10 @@
 <resources>
     <string name="app_name">MovieExample</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
-    <string name="lbl_success">Success</string>
-    <string name="lbl_general_error">General Error</string>
-    <string name="lbl_no_error_connection">No Internet Connection</string>
+     <string name="lbl_no_error_connection">No Internet Connection</string>
+    <string name="movie_image_description">movie image</string>
+    <string name="splash_logo_description">splash logo</string>
 
 </resources>

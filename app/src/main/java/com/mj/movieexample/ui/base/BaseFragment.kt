@@ -1,4 +1,4 @@
-package com.task.ui.base
+package com.mj.movieexample.ui.base
 
 
 import android.os.Bundle
@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.mj.movieexample.R
-import com.mj.movieexample.ui.base.BaseActivity
 
 abstract class BaseFragment : Fragment() {
 

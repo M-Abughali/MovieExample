@@ -9,19 +9,18 @@ import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.rule.ActivityTestRule
 import com.mj.movieexample.R
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
 class MovieListActivityTest {
 
     @JvmField @Rule
-    var activityScenarioRule= ActivityTestRule<MovieListActivity>(
+    var activityScenarioRule= ActivityTestRule(
         MovieListActivity::class.java
     )
 
     @Test
-    fun checkRecyeclViewVisibilty() {
+    fun checkRecyclerViewVisibility() {
         Espresso.onView(withId(R.id.rvMovies))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
@@ -41,7 +40,7 @@ class MovieListActivityTest {
     @Test
     fun scrollToNextPage() {
         val recyclerView: RecyclerView =
-            activityScenarioRule.getActivity().findViewById(R.id.rvMovies)
+            activityScenarioRule.activity.findViewById(R.id.rvMovies)
         val itemCount = recyclerView.adapter!!.itemCount
         Espresso.onView(withId(R.id.rvMovies))
             .perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(itemCount))

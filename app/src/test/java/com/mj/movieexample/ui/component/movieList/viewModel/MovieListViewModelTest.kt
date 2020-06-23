@@ -3,14 +3,13 @@ package com.mj.movieexample.ui.component.movieList.viewModel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.mj.movieexample.data.Result
-import com.mj.movieexample.data.model.Movie
+
 import com.mj.movieexample.data.model.MovieResult
 import com.mj.movieexample.data.remote.RemoteRepository
 import com.mj.movieexample.network.NoInternetException
 import com.mj.movieexample.network.RxSingleSchedulers
 import com.mj.movieexample.util.Constants
-import com.util.LiveDataTestUtil
-import io.reactivex.Observable
+import com.mj.movieexample.util.LiveDataTestUtil
 import io.reactivex.Single
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.StringContains
@@ -23,7 +22,6 @@ import org.mockito.Mockito
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 import java.lang.Exception
-import java.lang.IllegalStateException
 
 class MovieListViewModelTest {
 
@@ -33,7 +31,7 @@ class MovieListViewModelTest {
 
     @Mock
     lateinit var remoteRepository: RemoteRepository
-    lateinit var viewModel: MovieListViewModel
+    private lateinit var viewModel: MovieListViewModel
 
     @Mock
     lateinit var observer: Observer<Result<Any>>
@@ -58,29 +56,29 @@ class MovieListViewModelTest {
     @Test
     fun `Fetch Data from server with Success result`() {
         // arrange
-        val returentObject = MovieResult(
+        val returnedObject = MovieResult(
             page = 1,
-            results = ArrayList<Movie>(),
+            results = ArrayList(),
             total_pages = 10,
             total_results = 10
         )
 
-        val expectedListView = returentObject.results
+        val expectedListView = returnedObject.results
 
-        Mockito.`when`(remoteRepository.getMovies("1")).thenReturn(Single.just(returentObject))
+        Mockito.`when`(remoteRepository.getMovies("1")).thenReturn(Single.just(returnedObject))
 
         //act
         viewModel.getMovieFromServer()
 
-        // verfiy
-        verify(observer).onChanged(Result.InProgrss)
+        // verify
+        verify(observer).onChanged(Result.InProgress)
         val observedLiveDataListView =
             (LiveDataTestUtil.getValue(viewModel.getLiveData()) as Result.Success).data
         Assert.assertEquals(expectedListView, observedLiveDataListView)
     }
 
     @Test
-    fun `Fetch data with No Internet Connection exception happend`() {
+    fun `Fetch data with No Internet Connection exception happened`() {
         // arrange
         Mockito.`when`(remoteRepository.getMovies("1"))
             .thenReturn(Single.error(NoInternetException(Constants.NO_INTERNET_CONNECTION_MSG)))
@@ -90,14 +88,14 @@ class MovieListViewModelTest {
             viewModel.getMovieFromServer()
         } catch (e: NoInternetException) {
 
-            //verfiy
+            //verify
             assertThat(e.message, StringContains(Constants.NO_INTERNET_CONNECTION_MSG))
         }
 
     }
 
     @Test
-    fun `Fetch data with general exception happend`() {
+    fun `Fetch data with general exception happened`() {
         // arrange
         Mockito.`when`(remoteRepository.getMovies("1"))
             .thenReturn(Single.error(Exception(Constants.GENERAL_ERROR_MSG)))
@@ -106,7 +104,7 @@ class MovieListViewModelTest {
             // act
             viewModel.getMovieFromServer()
         } catch (e: Exception) {
-            //verfiy
+            //verify
             assertThat(e.message, StringContains(Constants.GENERAL_ERROR_MSG))
         }
 
@@ -122,7 +120,7 @@ class MovieListViewModelTest {
         //act
         viewModel.changeMoviePage()
 
-        //verfiy
+        //verify
         val returnedValue = LiveDataTestUtil.getValue(viewModel.getPageLiveData())
         Assert.assertEquals(expectedResult, returnedValue)
     }

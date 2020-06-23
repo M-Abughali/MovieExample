@@ -1,5 +1,6 @@
 package com.mj.movieexample.di.module;
 
+
 import com.mj.movieexample.network.RxSingleSchedulers;
 
 import dagger.Module;
@@ -9,6 +10,6 @@ import dagger.Provides;
 public class RxModule {
     @Provides
     public RxSingleSchedulers providesScheduler() {
-        return RxSingleSchedulers.DEFAULT;
+        return RxSingleSchedulers.Companion.getDEFAULT();
     }
 }

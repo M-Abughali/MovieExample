@@ -22,7 +22,7 @@ constructor() {
 
     private val retrofit: Retrofit
 
-    val okHttpBuilder =
+    private val okHttpBuilder =
         OkHttpClient.Builder().addInterceptor(NetworkInterceptor(MyApp.getInstance()))
 
 

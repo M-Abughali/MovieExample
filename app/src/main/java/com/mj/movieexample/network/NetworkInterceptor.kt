@@ -13,11 +13,11 @@ import javax.inject.Inject
 class NetworkInterceptor @Inject constructor(val application: Application) : Interceptor {
 
     private val API_KEY = "api_key"
-    private val LANUAGE = "language"
+    private val LANGUAGE = "language"
     private val CONTENT_TYPE = "Content-Type"
     private val CONTENT_TYPE_VALUE = "application/json"
 
-    fun isInternetAvailable(): Boolean {
+    private fun isInternetAvailable(): Boolean {
         val info = application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         info.activeNetworkInfo.also {
 
@@ -33,7 +33,7 @@ class NetworkInterceptor @Inject constructor(val application: Application) : Int
             .url
             .newBuilder()
             .addQueryParameter(API_KEY, BuildConfig.API_TOKEN)
-            .addQueryParameter(LANUAGE, Locale.getDefault().language)
+            .addQueryParameter(LANGUAGE, Locale.getDefault().language)
             .build()
 
         request = request.newBuilder().header(CONTENT_TYPE, CONTENT_TYPE_VALUE)

@@ -1,4 +1,4 @@
-package com.util
+package com.mj.movieexample.util
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer

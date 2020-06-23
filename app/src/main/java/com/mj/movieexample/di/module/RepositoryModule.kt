@@ -8,10 +8,10 @@ import javax.inject.Singleton
 
 
 @Module
-class RepositoryModule() {
+class RepositoryModule {
     @Singleton
     @Provides
-    fun getRepostory(movieApiServices: MovieApiServices): RemoteRepository {
+    fun getRepository(movieApiServices: MovieApiServices): RemoteRepository {
         return RemoteRepository(movieApiServices)
     }
 

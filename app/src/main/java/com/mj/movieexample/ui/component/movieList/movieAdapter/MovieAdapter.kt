@@ -10,11 +10,11 @@ import com.mj.movieexample.databinding.RowItemBinding
 import com.mj.movieexample.data.model.Movie
 import com.mj.movieexample.ui.base.listeners.RecyclerItemListener
 
-class MovieAdapter(val recyclerItemListener: RecyclerItemListener) :
+class MovieAdapter(private val recyclerItemListener: RecyclerItemListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var list: ArrayList<Movie> = ArrayList<Movie>()
-    private val VIEW_TYPE1 = 1
-    private val VIEW_TYPE2 = 2
+    private var list= ArrayList<Movie>()
+    private val TYPE1 = 1
+    private val TYPE2 = 2
 
 
     fun setItems(list: List<Movie>) {
@@ -24,15 +24,15 @@ class MovieAdapter(val recyclerItemListener: RecyclerItemListener) :
     }
 
     override fun getItemViewType(position: Int): Int {
-        if (list.get(position).title.startsWith("A"))
-            return VIEW_TYPE1
+        return if (list[position].title.startsWith("A"))
+            TYPE1
         else
-            return VIEW_TYPE2
+            TYPE2
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        if (viewType == VIEW_TYPE1) {
+        if (viewType == TYPE1) {
             val rowItemBinding = DataBindingUtil.inflate<RowItemBinding>(
                 LayoutInflater.from(parent.context),
                 R.layout.row_item,
@@ -58,13 +58,13 @@ class MovieAdapter(val recyclerItemListener: RecyclerItemListener) :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        if (holder.itemViewType == VIEW_TYPE1) {
+        if (holder.itemViewType == TYPE1) {
             holder as MovieViewHolder
-            holder.bind(list.get(position))
+            holder.bind(list[position])
 
-        } else if (holder.itemViewType == VIEW_TYPE2) {
+        } else if (holder.itemViewType == TYPE2) {
             holder as MovieViewHolder2
-            holder.bind(list.get(position))
+            holder.bind(list[position])
 
         }
 

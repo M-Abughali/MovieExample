@@ -1,4 +1,4 @@
-package com.task.ui.base
+package com.mj.movieexample.ui.base
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -16,7 +16,7 @@ abstract class BaseViewModel : ViewModel() {
 
     protected abstract fun onLoading(disposable: Disposable?)
 
-    protected abstract fun onSuccess(`object`: MovieResult?)
+    protected abstract fun onSuccess(it: MovieResult?)
 
     protected abstract fun onError(throwable: Throwable?)
 

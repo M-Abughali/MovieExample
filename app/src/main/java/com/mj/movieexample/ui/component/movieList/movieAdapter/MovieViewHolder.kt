@@ -9,17 +9,17 @@ import com.mj.movieexample.util.Constants
 import com.squareup.picasso.Picasso
 
 class MovieViewHolder(
-    val rowItemBinding: RowItemBinding,
-    val recyclerItemListener: RecyclerItemListener?
+    private val rowItemBinding: RowItemBinding,
+    private val recyclerItemListener: RecyclerItemListener?
 ) :
     RecyclerView.ViewHolder(rowItemBinding.root) {
     fun bind(movie: Movie) {
         Picasso.get().load(Constants.MAIN_IMAGE_URL + movie.poster_path)
             .error(R.drawable.error_image_place_holder)
-            .placeholder(R.drawable.image_place_holder).into(rowItemBinding.movieImage);
+            .placeholder(R.drawable.image_place_holder).into(rowItemBinding.movieImage)
         rowItemBinding.movieItem = movie
         rowItemBinding.root.setOnClickListener {
-            recyclerItemListener?.onItemSelected(movie);
+            recyclerItemListener?.onItemSelected(movie)
         }
     }
 

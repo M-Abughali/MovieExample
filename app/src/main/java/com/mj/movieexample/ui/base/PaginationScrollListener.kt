@@ -4,7 +4,7 @@ package com.mj.movieexample.ui.base
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class PaginationScrollListener(var layoutManager: LinearLayoutManager) :
+abstract class PaginationScrollListener(private var layoutManager: LinearLayoutManager) :
     RecyclerView.OnScrollListener() {
 
     abstract fun isLoading(): Boolean
@@ -16,11 +16,11 @@ abstract class PaginationScrollListener(var layoutManager: LinearLayoutManager) 
         val totalItemCount = layoutManager.itemCount
         val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
 
-        if (!isLoading()) {
+        if (!isLoading())
             if (visibleItemCount + firstVisibleItemPosition >= totalItemCount && firstVisibleItemPosition >= 0) {
                 loadMoreItems()
             }//                    && totalItemCount >= ClothesFragment.itemsCount
-        }
+
     }
 
     abstract fun loadMoreItems()

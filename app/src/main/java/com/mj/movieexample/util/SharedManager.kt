@@ -10,20 +10,20 @@ import javax.inject.Singleton
 @Singleton
 class SharedManager private constructor(val application: Application) {
 
-    private val fileName="secret_shared_prefs";
+    private val fileName="secret_shared_prefs"
 
     companion object{
-        private lateinit var Instance: SharedPreferences;
+        private lateinit var Instance: SharedPreferences
         fun getInstance(): SharedPreferences {
-            return Instance;
+            return Instance
         }
 
     }
 
-    fun getSecurePrefrenceEditor(): SharedPreferences.Editor? {
-        var masterKeyAlias: String = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+    fun getSecurePreferenceEditor(): SharedPreferences.Editor? {
+        val masterKeyAlias: String = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
 
-        var sharedPreferences: SharedPreferences = EncryptedSharedPreferences.create(
+        val sharedPreferences: SharedPreferences = EncryptedSharedPreferences.create(
             fileName,
             masterKeyAlias,
             application,
@@ -32,8 +32,8 @@ class SharedManager private constructor(val application: Application) {
         )
 
         // use the shared preferences and editor as you normally would
-        var editor = sharedPreferences.edit()
-        return editor
+        return  sharedPreferences.edit()
+
     }
 
 

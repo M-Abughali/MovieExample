@@ -5,11 +5,7 @@ import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
-import com.mj.movieexample.R
-import com.mj.movieexample.core.MyApp
-import com.mj.movieexample.databinding.ToolbarBinding
 import com.mj.movieexample.ui.base.listeners.ActionBarView
-import com.task.ui.base.BaseViewModel
 import kotlinx.android.synthetic.main.toolbar.*
 
 abstract class BaseActivity : AppCompatActivity(), ActionBarView {
@@ -33,7 +29,6 @@ abstract class BaseActivity : AppCompatActivity(), ActionBarView {
 
 
     override fun setUpIconVisibility(visible: Boolean) {
-       // setSupportActionBar(findViewById(R.id.toolbar))
         val actionBar = supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(visible)
     }

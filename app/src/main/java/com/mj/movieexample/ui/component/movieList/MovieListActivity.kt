@@ -2,7 +2,6 @@ package com.mj.movieexample.ui.component.movieList
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -26,9 +25,9 @@ import javax.inject.Inject
 
 class MovieListActivity : BaseActivity(), RecyclerItemListener {
     var isLoading: Boolean = false
-    lateinit var movieAdapter: MovieAdapter
+    private lateinit var movieAdapter: MovieAdapter
 
-    lateinit var binding: ActivityMovieListBinding
+    private lateinit var binding: ActivityMovieListBinding
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -61,20 +60,20 @@ class MovieListActivity : BaseActivity(), RecyclerItemListener {
         isLoading = false
         when (result) {
             is Result.Success -> {
-                showLoadingProgrss(false)
+                showLoadingProgress(false)
                 bindListData(result.data!!)
                 setTitle("" + rvMovies.adapter?.itemCount)
             }
             is Result.NetworkGeneralError -> {
-                showLoadingProgrss(false)
+                showLoadingProgress(false)
                 Toast.makeText(this, result.msg, Toast.LENGTH_LONG).show()
             }
-            is Result.InProgrss -> {
+            is Result.InProgress -> {
                 isLoading = true
-                showLoadingProgrss(true)
+                showLoadingProgress(true)
             }
             is Result.NetworkNoInternetError -> {
-                showLoadingProgrss(false)
+                showLoadingProgress(false)
                 Toast.makeText(this, getString(R.string.lbl_no_error_connection), Toast.LENGTH_LONG)
                     .show()
 
@@ -137,7 +136,7 @@ class MovieListActivity : BaseActivity(), RecyclerItemListener {
     }
 
 
-    private fun showLoadingProgrss(isVisible: Boolean) {
+    private fun showLoadingProgress(isVisible: Boolean) {
         progress.visibility = when (isVisible) {
             true -> View.VISIBLE
             false -> View.GONE

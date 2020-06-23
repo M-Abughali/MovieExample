@@ -1,23 +1,21 @@
 package com.mj.movieexample.ui.component.movieList.viewModel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.mj.movieexample.R
 import com.mj.movieexample.data.Result
 import com.mj.movieexample.data.model.Movie
 import com.mj.movieexample.data.model.MovieResult
 import com.mj.movieexample.data.remote.RemoteRepository
 import com.mj.movieexample.network.NoInternetException
 import com.mj.movieexample.network.RxSingleSchedulers
+import com.mj.movieexample.ui.base.BaseViewModel
 import com.mj.movieexample.util.Constants.INSTANCE.GENERAL_ERROR_MSG
 import com.mj.movieexample.util.Constants.INSTANCE.SUCCESS_MSG
-import com.task.ui.base.BaseViewModel
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 class MovieListViewModel @Inject constructor(
-    val repository: RemoteRepository, val rxSingleSchedulers: RxSingleSchedulers
+    private val repository: RemoteRepository,private  val rxSingleSchedulers: RxSingleSchedulers
 ) : BaseViewModel() {
 
 
@@ -30,7 +28,7 @@ class MovieListViewModel @Inject constructor(
 
 
     init {
-        totalMoviesData.value = ArrayList<Movie>()
+        totalMoviesData.value = ArrayList()
         moviePageLiveDataPrivate.value = 1
     }
 
@@ -52,7 +50,7 @@ class MovieListViewModel @Inject constructor(
 
 
     override fun onLoading(disposable: Disposable?) {
-        movieResultLiveDataPrivate.postValue(Result.InProgrss)
+        movieResultLiveDataPrivate.postValue(Result.InProgress)
     }
 
     override fun onSuccess(it: MovieResult?) {
