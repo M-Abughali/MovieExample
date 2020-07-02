@@ -96,8 +96,6 @@ Qapp/src/main/java/com/mj/movieexample/ui/component/movieList/MovieListActivity.
 Wapp/src/main/java/com/mj/movieexample/ui/component/movieDetails/MovieDetailsActivity.kt,8\7\873fe384677f98fcd93a0af6677515b4fe5574ca
 d
 4app/src/main/java/com/mj/movieexample/data/Result.kt,b\f\bf9ccc1c12c84a254fa3c51dfe1076db90737b83
-u
-Eapp/src/main/java/com/mj/movieexample/network/RxSingleSchedulers.java,a\e\aed6edba7df065d322e0843a20b8fafc989f390d
 ê
 `app/src/test/java/com/mj/movieexample/ui/component/movieList/viewModel/MovieListViewModelTest.kt,9\e\9ecb6a970d54ebdeca8ebc653ef0c6fa665b6a8c
 y
@@ -110,3 +108,15 @@ m
 \app/src/androidTest/java/com/mj/movieexample/ui/component/movieList/MovieListActivityTest.kt,c\8\c8a384600db8920688a8705da52728403627b5e6
 í
 bapp/src/main/java/com/mj/movieexample/ui/component/movieList/viewModel/SearchMovieListViewModel.kt,4\c\4cb629f73bcc56df5e05c2804c0e230e96b90c25
+s
+Capp/src/main/java/com/mj/movieexample/network/RxSingleSchedulers.kt,d\1\d1a80b2196ec544da7bb6d0b0b748e54c7da8439
+_
+/app/src/main/res/layout/activity_movie_list.xml,b\b\bb3810eca6e31aa2e1b2a8f0317d507cbd6265bd
+[
++app/src/main/res/layout/activity_splash.xml,1\3\13b26b9b6631cddf289c5ab7c4e546a180da97d8
+U
+%app/src/main/res/layout/row_item2.xml,f\3\f333eda82a43b0591a113c3dac354865f4a057b1
+S
+#app/src/main/res/values/strings.xml,d\2\d2281fbb3027de2722081a53408dd77628bf080e
+\
+,.idea/inspectionProfiles/Project_Default.xml,4\9\496a238a6afa168dbaf6efd37bb459331589579c
